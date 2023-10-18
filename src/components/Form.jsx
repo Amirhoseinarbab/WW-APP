@@ -1,14 +1,21 @@
 /* eslint-disable no-unused-vars */
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
 import BackButton from "./BackButton";
 import Button from "./Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
+import Message from "./Message";
+import Spinner from "./Spinner";
 
-export function convertToEmoji(countryCode) {
-  const codePoints = countryCode
+import DatePicker, { setDefaultLocale } from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
+export function convertToEmoji(countryEmojiCode) {
+  const codePoints = countryEmojiCode
     .toUpperCase()
     .split("")
     .map((char) => 127397 + char.charCodeAt());
@@ -17,12 +24,54 @@ export function convertToEmoji(countryCode) {
 
 function Form() {
   const [cityName, setCityName] = useState("");
+  const [countryEmoji, setCountryEmoji] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [lat, lng] = useUrlPosition();
+
+  useEffect(() => {
+    // setError("")
+    if (!lat || !lng) return;
+    setLoading(true);
+    fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    )
+      .then((res) => res.json())
+
+      .then((data) => {
+        setError("");
+        if (!data.city) {
+          setError("That doesn't seem to be a city. Click somewhere else 😉");
+        } else {
+          setError("");
+        }
+        setCityName(data.city);
+        setCountry(data.countryName);
+        setCountryEmoji(convertToEmoji(data.countryCode));
+        setLoading(false);
+      })
+      .catch((er) => {
+        // throw new Error(er);
+        setError(er);
+      })
+      .finally
+      // console.log(loading),
+      ();
+  }, [lat, lng]);
+
+ 
+
+  if (loading) return <Spinner message={error} />;
+  if (error) return <Message message={error} />;
+  if (!lat && !lng)
+    return <Message message="start by clicking some where on the map...💖" />;
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -30,15 +79,19 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={styles.flag}>{countryEmoji}</span>
       </div>
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          dateFormat="dd/mm/yyyy"
+
+          // fixedHeight
         />
       </div>
 
