@@ -30,6 +30,19 @@ export default function App() {
     // console.log(isLoading)
   }, []);
 
+  function setNewCity(newCity) {
+    setIsLoading(true);
+    fetch("http://localhost:8001/cities", {
+      method: "POST",
+      body: JSON.stringify(newCity),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((data) => data.json())
+      .then((res) => setCities((city)=> [...city , res]))
+      .catch((e) => console.log(e));
+    setIsLoading(false);
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -37,6 +50,7 @@ export default function App() {
         isLoading,
         selectedCity,
         setSelectedCity,
+        setNewCity
       }}
     >
       <BrowserRouter>

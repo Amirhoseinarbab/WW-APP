@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-//b1
+//b1 comit
 
-import { useEffect, useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
 import BackButton from "./BackButton";
@@ -14,8 +15,10 @@ import Spinner from "./Spinner";
 import DatePicker, { setDefaultLocale } from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { CitiesContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
-export function convertToEmoji(countryEmojiCode) {
+ function convertToEmoji(countryEmojiCode) {
   const codePoints = countryEmojiCode
     .toUpperCase()
     .split("")
@@ -33,6 +36,9 @@ function Form() {
   const [loading, setLoading] = useState(false);
 
   const [lat, lng] = useUrlPosition();
+  const navigate = useNavigate();
+
+  const {setNewCity} = useContext(CitiesContext)
 
   useEffect(() => {
     // setError("")
@@ -64,7 +70,27 @@ function Form() {
       ();
   }, [lat, lng]);
 
- 
+  function handelSubmit(e) {
+    e.preventDefault();
+
+    setNotes("")
+
+    const newCity = 
+    {
+      cityName,
+      country,
+      countryEmoji ,
+      date ,
+      notes,
+      position: {
+        lat ,
+        lng 
+      }
+    }
+    setNewCity(newCity)
+    navigate("/app/cities")
+
+  }
 
   if (loading) return <Spinner message={error} />;
   if (error) return <Message message={error} />;
@@ -72,7 +98,7 @@ function Form() {
     return <Message message="start by clicking some where on the map...💖" />;
 
   return (
-    <form className={styles.form} >
+    <form className={styles.form} onSubmit={handelSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input

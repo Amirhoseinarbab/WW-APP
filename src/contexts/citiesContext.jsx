@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
- const CitiesContext = createContext();
+const CitiesContext = createContext();
 
 function CitiesContextProvider({ Children }) {
   const [cities, setCities] = useState([]);
@@ -21,6 +21,19 @@ function CitiesContextProvider({ Children }) {
     // console.log(isLoading)
   }, []);
 
+  function setNewCity(newCity) {
+    setIsLoading(true);
+    fetch("http://localhost:8001/cities", {
+      method: "POST",
+      body: JSON.stringify(newCity),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((data) => data.json())
+      .then((res) => setCities(res))
+      .catch((e) => console.log(e));
+    setIsLoading(false);
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -28,6 +41,7 @@ function CitiesContextProvider({ Children }) {
         isLoading,
         selectedCity,
         setSelectedCity,
+        setNewCity,
       }}
     >
       {Children}
