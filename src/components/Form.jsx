@@ -2,7 +2,6 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 //b1 comit
 
-
 import { useContext, useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
@@ -18,7 +17,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { CitiesContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
- function convertToEmoji(countryEmojiCode) {
+function convertToEmoji(countryEmojiCode) {
   const codePoints = countryEmojiCode
     .toUpperCase()
     .split("")
@@ -38,7 +37,7 @@ function Form() {
   const [lat, lng] = useUrlPosition();
   const navigate = useNavigate();
 
-  const {setNewCity} = useContext(CitiesContext)
+  const { setNewCity } = useContext(CitiesContext);
 
   useEffect(() => {
     // setError("")
@@ -73,23 +72,21 @@ function Form() {
   function handelSubmit(e) {
     e.preventDefault();
 
-    setNotes("")
+    setNotes("");
 
-    const newCity = 
-    {
+    const newCity = {
       cityName,
       country,
-      countryEmoji ,
-      date ,
+      countryEmoji,
+      date,
       notes,
       position: {
-        lat ,
-        lng 
-      }
-    }
-    setNewCity(newCity)
-    navigate("/app/cities")
-
+        lat,
+        lng,
+      },
+    };
+    setNewCity(newCity);
+    navigate("/app/cities");
   }
 
   if (loading) return <Spinner message={error} />;

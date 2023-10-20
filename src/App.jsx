@@ -19,20 +19,18 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
 
-function fetchCities(){
-  setIsLoading(true);
-  fetch("http://localhost:8001/cities")
-  .then((data) => data.json())
-  .then((res) => setCities(res))
-  .catch((e) => console.log(e));
-  setIsLoading(false)
-  
-
-}
+  function fetchCities() {
+    setIsLoading(true);
+    fetch("http://localhost:8001/cities")
+      .then((data) => data.json())
+      .then((res) => setCities(res))
+      .catch((e) => console.log(e));
+    setIsLoading(false);
+  }
 
   useEffect(() => {
     setIsLoading(true);
-    fetchCities()
+    fetchCities();
     setIsLoading(false);
     // console.log(cities)
     // console.log(isLoading)
@@ -46,16 +44,15 @@ function fetchCities(){
       headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
-      .then((res) => setCities((city)=> [...city , res]))
+      .then((res) => setCities((city) => [...city, res]))
       .catch((e) => console.log(e));
     setIsLoading(false);
   }
   function deleteCity(id) {
     fetch(`http://localhost:8001/cities/${id}`, {
       method: "DELETE",
-    })
-    fetchCities()
-
+    });
+    fetchCities();
   }
 
   return (
@@ -66,7 +63,7 @@ function fetchCities(){
         selectedCity,
         setSelectedCity,
         setNewCity,
-        deleteCity
+        deleteCity,
       }}
     >
       <BrowserRouter>
