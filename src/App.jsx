@@ -62,11 +62,16 @@ export default function App() {
       .then((data) => data.json())
       .then((res) =>
         dispatch({ type: 'SET_CITIES', payload: [...state.cities, res] })
+
+
+
+
+        
       )
       .catch((e) => console.log(e));
 
 
-      
+
 
     dispatch({ type: 'SET_IS_LOADING', payload: false });
   }
