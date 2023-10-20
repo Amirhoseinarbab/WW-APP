@@ -65,6 +65,9 @@ export default function App() {
       )
       .catch((e) => console.log(e));
 
+
+      
+
     dispatch({ type: 'SET_IS_LOADING', payload: false });
   }
   function deleteCity(id) {
