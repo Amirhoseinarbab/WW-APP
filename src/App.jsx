@@ -1,56 +1,75 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createContext, useEffect, useReducer } from 'react';
 
-import Homepage from "./pages/Homepage";
-import Login from "./pages/Login";
-import Product from "./pages/Product";
-import Pricing from "./pages/Pricing";
-import AppLayout from "./pages/AppLayout";
-import CityList from "./components/CityList";
-import City from "./components/City";
+import Homepage from './pages/Homepage';
+import Login from './pages/Login';
+import Product from './pages/Product';
+import Pricing from './pages/Pricing';
+import AppLayout from './pages/AppLayout';
+import CityList from './components/CityList';
+import City from './components/City';
 
-import CountryList from "./components/CountryList";
-import Form from "./components/Form";
+import CountryList from './components/CountryList';
+import Form from './components/Form';
 
 export const CitiesContext = createContext();
 
+const initialState = {
+  cities: [],
+  isLoading: false,
+  selectedCity: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_CITIES':
+      return { ...state, cities: action.payload };
+    case 'SET_IS_LOADING':
+      return { ...state, isLoading: action.payload };
+    case 'SET_SELECTED_CITY':
+      return { ...state, selectedCity: action.payload };
+    default:
+      return state;
+  }
+};
+
 export default function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { cities, isLoading, selectedCity } = state;
 
   function fetchCities() {
-    setIsLoading(true);
-    fetch("http://localhost:8001/cities")
+    // setIsLoading(true);
+    dispatch({ type: 'SET_IS_LOADING', payload: true });
+    fetch('http://localhost:8001/cities')
       .then((data) => data.json())
-      .then((res) => setCities(res))
+      .then((res) => dispatch({ type: 'SET_CITIES', payload: res }))
       .catch((e) => console.log(e));
-    setIsLoading(false);
+    dispatch({ type: 'SET_IS_LOADING', payload: false });
   }
 
   useEffect(() => {
-    setIsLoading(true);
     fetchCities();
-    setIsLoading(false);
-    // console.log(cities)
-    // console.log(isLoading)
   }, []);
 
   function setNewCity(newCity) {
-    setIsLoading(true);
-    fetch("http://localhost:8001/cities", {
-      method: "POST",
+    dispatch({ type: 'SET_IS_LOADING', payload: true });
+
+    fetch('http://localhost:8001/cities', {
+      method: 'POST',
       body: JSON.stringify(newCity),
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((data) => data.json())
-      .then((res) => setCities((city) => [...city, res]))
+      .then((res) =>
+        dispatch({ type: 'SET_CITIES', payload: [...state.cities, res] })
+      )
       .catch((e) => console.log(e));
-    setIsLoading(false);
+
+    dispatch({ type: 'SET_IS_LOADING', payload: false });
   }
   function deleteCity(id) {
     fetch(`http://localhost:8001/cities/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     });
     fetchCities();
   }
@@ -61,7 +80,7 @@ export default function App() {
         cities,
         isLoading,
         selectedCity,
-        setSelectedCity,
+        dispatch,
         setNewCity,
         deleteCity,
       }}
@@ -69,22 +88,22 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage />} />
-          <Route path="Pricing" element={<Pricing />} />
-          <Route path="Product" element={<Product />} />
-          <Route path="Login" element={<Login />} />
-          <Route path="app" element={<AppLayout />}>
+          <Route path='Pricing' element={<Pricing />} />
+          <Route path='Product' element={<Product />} />
+          <Route path='Login' element={<Login />} />
+          <Route path='app' element={<AppLayout />}>
             <Route index element={<p>important index rout!</p>} />
             <Route
-              path="cities"
+              path='cities'
               element={<CityList cities={cities} isLoading={isLoading} />}
             />
-            <Route path="cities/:id" element={<City cities={cities} />} />
+            <Route path='cities/:id' element={<City cities={cities} />} />
 
             <Route
-              path="countries"
+              path='countries'
               element={<CountryList cities={cities} isLoading={isLoading} />}
             />
-            <Route path="form" element={<Form />} />
+            <Route path='form' element={<Form />} />
           </Route>
         </Routes>
       </BrowserRouter>
