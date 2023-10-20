@@ -12,9 +12,14 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 export default function CityItem({ city }) {
-  const { selectedCity, setSelectedCity } = useContext(CitiesContext);
+  const { selectedCity, setSelectedCity , deleteCity} = useContext(CitiesContext);
 
   const { cityName, emoji, date, id, position } = city;
+
+  function handelDelete(e){
+    e.preventDefault()
+    deleteCity(city.id)
+  }
 
   return (
     <li onClick={() => setSelectedCity(id)}>
@@ -27,7 +32,7 @@ export default function CityItem({ city }) {
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>{formatDate(date)}</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={(e)=> handelDelete(e)}>&times;</button>
       </Link>
     </li>
   );
