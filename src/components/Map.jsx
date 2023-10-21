@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-// import React from 'react'
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import { useContext, useEffect, useState } from "react";
 
@@ -14,7 +11,6 @@ import {
   useMapEvent,
 } from "react-leaflet";
 import { CitiesContext } from "../App";
-import City from "./City";
 import Button from "./Button";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
