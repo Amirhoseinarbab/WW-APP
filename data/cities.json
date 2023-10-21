@@ -1,187 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 73930385
-    },
-    {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": 17806751
-    },
-    {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": 98443197
-    },
-    {
-      "2": 1718067512,
-      "cityName": "Barcelona",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": 178067512
-    },
-    {
-      "cityName": "Faro",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": 984431972
-    },
-    {
-      "cityName": "Pailhares",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2023-10-07T19:14:41.841Z",
-      "notes": "",
-      "position": {
-        "lat": "45.093025721996035",
-        "lng": "4.577842830459913"
-      },
-      "id": 984431973
-    },
-    {
-      "cityName": "Pailhares",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2023-10-17T11:41:14.973Z",
-      "notes": "dad",
-      "position": {
-        "lat": "45.09085344818988",
-        "lng": "4.578380584716798"
-      },
-      "id": 984431974
-    },
-    {
-      "cityName": "Monesterio",
-      "country": "Spain",
-      "countryEmoji": "🇪🇸",
-      "date": "2023-10-18T11:05:43.184Z",
-      "notes": "fsf",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431975
-    },
-    {
-      "cityName": "Monesterio",
-      "country": "Spain",
-      "countryEmoji": "🇪🇸",
-      "date": "2023-10-18T11:05:43.184Z",
-      "notes": "fsf",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431976
-    },
-    {
-      "cityName": "El Viso",
-      "country": "Spain",
-      "countryEmoji": "🇪🇸",
-      "date": "2023-10-18T11:06:55.885Z",
-      "notes": "fsafs",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431977
-    },
-    {
-      "cityName": "’Ain Mahdi",
-      "country": "Algeria",
-      "countryEmoji": "🇩🇿",
-      "date": "2023-10-18T11:06:55.885Z",
-      "notes": "aaa",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431978
-    },
-    {
-      "cityName": "Al Jawf",
-      "country": "Libya",
-      "countryEmoji": "🇱🇾",
-      "date": "2023-10-18T11:13:02.600Z",
-      "notes": "aaaa",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431979
-    },
-    {
-      "cityName": "Brezina",
-      "country": "Algeria",
-      "countryEmoji": "🇩🇿",
-      "date": "2023-10-19T10:13:49.482Z",
-      "notes": "aaaaaa",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 984431980
-    },
-    {
-      "cityName": "Hoein-myeon",
-      "country": "Korea (the Republic of)",
-      "countryEmoji": "🇰🇷",
-      "date": "2023-10-19T13:17:05.093Z",
-      "notes": "aaaa",
-      "position": {
-        "lat": "36.491973470593685",
-        "lng": "127.61718750000001"
-      },
-      "id": 984431981
-    },
-    {
-      "cityName": "Deyhuk",
-      "country": "Iran (Islamic Republic of)",
-      "countryEmoji": "🇮🇷",
-      "date": "2023-10-19T13:30:28.020Z",
-      "notes": "",
-      "position": {
-        "lat": "31.952162238024975",
-        "lng": "56.68945312500001"
-      },
-      "id": 984431982
-    },
-    {
       "cityName": "Zana El Beida",
       "country": "Algeria",
       "countryEmoji": "🇩🇿",
@@ -192,6 +11,18 @@
         "lng": "6.064453125000001"
       },
       "id": 984431983
+    },
+    {
+      "cityName": "Kuopio",
+      "country": "Finland",
+      "countryEmoji": "🇫🇮",
+      "date": "2023-10-20T20:47:24.179Z",
+      "notes": "",
+      "position": {
+        "lat": "63.23362741232569",
+        "lng": "27.905273437500004"
+      },
+      "id": 984431984
     }
   ]
 }
