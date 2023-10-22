@@ -13,6 +13,7 @@ import CountryList from "./components/CountryList";
 import Form from "./components/Form";
 import { AuthProvider } from "./contexts/FakeAuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import { JSON_SERVER_URL } from "./Appsetup";
 
 export const CitiesContext = createContext();
 
@@ -42,7 +43,7 @@ export default function App() {
   function fetchCities() {
     // setIsLoading(true);
     dispatch({ type: "SET_IS_LOADING", payload: true });
-    fetch("http://localhost:8001/cities")
+    fetch(`${JSON_SERVER_URL}/cities`)
       .then((data) => data.json())
       .then((res) => dispatch({ type: "SET_CITIES", payload: res }))
       .catch((e) => console.log(e));
@@ -55,8 +56,7 @@ export default function App() {
 
   function setNewCity(newCity) {
     dispatch({ type: "SET_IS_LOADING", payload: true });
-
-    fetch("http://localhost:8001/cities", {
+    fetch(`${JSON_SERVER_URL}/cities`, {
       method: "POST",
       body: JSON.stringify(newCity),
       headers: { "Content-Type": "application/json" },
