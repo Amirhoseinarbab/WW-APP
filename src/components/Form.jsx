@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-//b1 comit
 
 import { useContext, useEffect, useState } from "react";
 
@@ -11,7 +9,7 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 import Message from "./Message";
 import Spinner from "./Spinner";
 
-import DatePicker, { setDefaultLocale } from "react-datepicker";
+import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { CitiesContext } from "../App";
@@ -32,24 +30,23 @@ function Form() {
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const [lat, lng] = useUrlPosition();
   const navigate = useNavigate();
 
-  const { setNewCity } = useContext(CitiesContext);
+  const { setNewCity, isLoading, dispatch } = useContext(CitiesContext);
 
   useEffect(() => {
     // setError("")
     if (!lat || !lng) return;
-    setLoading(true);
+    dispatch({ type: "SET_IS_LOADING", payload: true });
+
     fetch(
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
     )
       .then((res) => res.json())
 
       .then((data) => {
-        setError("");
         if (!data.city) {
           setError("That doesn't seem to be a city. Click somewhere else 😉");
         } else {
@@ -58,16 +55,13 @@ function Form() {
         setCityName(data.city);
         setCountry(data.countryName);
         setCountryEmoji(convertToEmoji(data.countryCode));
-        setLoading(false);
+        dispatch({ type: "SET_IS_LOADING", payload: false });
       })
       .catch((er) => {
         // throw new Error(er);
         setError(er);
-      })
-      .finally
-      // console.log(loading),
-      ();
-  }, [lat, lng]);
+      });
+  }, [lat, lng, dispatch]);
 
   function handelSubmit(e) {
     e.preventDefault();
@@ -89,7 +83,7 @@ function Form() {
     navigate("/app/cities");
   }
 
-  if (loading) return <Spinner message={error} />;
+  if (isLoading) return <Spinner />;
   if (error) return <Message message={error} />;
   if (!lat && !lng)
     return <Message message="start by clicking some where on the map...💖" />;

@@ -14,6 +14,7 @@ import Form from "./components/Form";
 import { AuthProvider } from "./contexts/FakeAuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { JSON_SERVER_URL } from "./Appsetup";
+import Message from "./components/Message";
 
 export const CitiesContext = createContext();
 
@@ -62,12 +63,11 @@ export default function App() {
       headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
-      .then((res) =>
-        dispatch({ type: "SET_CITIES", payload: [...state.cities, res] })
-      )
+      .then((res) => {
+        dispatch({ type: "SET_CITIES", payload: [...state.cities, res] });
+        dispatch({ type: "SET_IS_LOADING", payload: false });
+      })
       .catch((e) => console.log(e));
-
-    dispatch({ type: "SET_IS_LOADING", payload: false });
   }
   function deleteCity(id) {
     fetch(`http://localhost:8001/cities/${id}`, {
@@ -102,7 +102,16 @@ export default function App() {
                 </ProtectedRoute>
               }
             >
-              <Route index element={<p>important index rout!</p>} />
+              <Route
+                index
+                element={
+                  <Message
+                    message={
+                      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo est dicta illum vero culpa cum quaerat architecto sapiente eius non soluta, molestiae nihil laborum, placeat debitis,"
+                    }
+                  />
+                }
+              />
               <Route
                 path="cities"
                 element={<CityList cities={cities} isLoading={isLoading} />}
