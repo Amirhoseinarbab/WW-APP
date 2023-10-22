@@ -8,13 +8,12 @@ import User from "../components/User";
 export default function AppLayout() {
   const navigate = useNavigate();
 
-  
-    return (
-      <div className={styles.app}>
-        <User />
-        <Sidebar />
+  return (
+    <div className={styles.app}>
+      <User />
+      <Sidebar />
 
-        <Map onClick={() => navigate("form")} />
-      </div>
-    );
+      <Map onClick={() => navigate("form")} />
+    </div>
+  );
 }

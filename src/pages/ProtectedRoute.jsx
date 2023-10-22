@@ -11,7 +11,7 @@ function ProtectedRoute({ children }) {
     function () {
       if (!isLoggedIn) navigate("/");
     },
-    [isLoggedIn, navigate]
+    [isLoggedIn, navigate],
   );
 
   return isLoggedIn ? children : null;

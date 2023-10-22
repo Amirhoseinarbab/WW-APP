@@ -14,12 +14,11 @@ function User() {
   const user = FAKE_USER;
   const { logout } = useContext(AuthContext);
 
-      const navigate = useNavigate()
-      
-      
-      function handleClick() {
-        logout();
-        navigate("/")
+  const navigate = useNavigate();
+
+  function handleClick() {
+    logout();
+    navigate("/");
   }
 
   return (

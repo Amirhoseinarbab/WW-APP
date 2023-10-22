@@ -42,7 +42,7 @@ function Form() {
     dispatch({ type: "SET_IS_LOADING", payload: true });
 
     fetch(
-      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
     )
       .then((res) => res.json())
 

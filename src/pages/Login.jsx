@@ -15,9 +15,8 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     if (isLoggedIn) {
-      navigate('/app' , {replace : true});
+      navigate("/app", { replace: true });
     }
   }, [isLoggedIn, navigate]);
 
@@ -46,7 +45,7 @@ export default function Login() {
         </div>
 
         <div>
-          <Link 
+          <Link
             className="cta"
             onClick={() => {
               login(email, password);

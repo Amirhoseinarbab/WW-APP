@@ -21,14 +21,7 @@ export const CitiesContext = createContext();
 const initialState = {
   cities: [],
 
-
-
-
   isLoading: false,
-
-
-
-  
 
   selectedCity: null,
 };

@@ -7,7 +7,7 @@ import { CitiesContext } from "../App";
 
 export default function CountryList() {
   const { cities, isLoading } = useContext(CitiesContext);
-  console.log("🚀 ~ file: CountryList.jsx:10 ~ CountryList ~ cities:", cities)
+  console.log("🚀 ~ file: CountryList.jsx:10 ~ CountryList ~ cities:", cities);
 
   if (isLoading) return <Spinner />;
 
@@ -19,13 +19,11 @@ export default function CountryList() {
       addedCountries.map((a) => a.country).includes(city.country)
         ? addedCountries
         : [...addedCountries, { country: city.country, emoji: city.emoji }],
-    []
+    [],
   );
 
   return (
     <ul className={styles.countryList}>
-    
-
       {addedCountries.map((country, i) => (
         <CountryItem country={country} key={i} />
       ))}
