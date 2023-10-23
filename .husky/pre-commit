@@ -1,1 +1,1 @@
-prettier --write .
+prettier --write . && git add -A .

@@ -8,7 +8,6 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format": "prettier --write .",
     "server": "npx json-server --watch ./data/cities.json --port 8001 --delay 500",
     "prettier": "prettier --write ."
   },
@@ -30,19 +29,9 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "husky": "^8.0.3",
+    "husky": "^4.3.8",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "vite": "^4.4.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,html,css,json,md}": [
-      "npx prettier --write ."
-    ]
   }
 }
