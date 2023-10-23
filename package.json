@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "npx json-server --watch ./data/cities.json --port 8001 --delay 500",
-    "prettier": "prettier --write ."
+    "p": "prettier --write ."
   },
   "dependencies": {
     "eslint-config-react-app": "^7.0.1",
